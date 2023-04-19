@@ -54,7 +54,6 @@ class ChatServiceTest {
         ChatService.getChats().put(0,emptyChat)
         ChatService.getChats()[0]
         val result = ChatService.getLastMessageFromEveryChat()
-        println (result.last())
         assertEquals("Нет сообщений",result.last() ) //Исключение, которое записывает в список "Нет сообщений" по пустому чату
     }
     @Test
@@ -104,7 +103,7 @@ class ChatServiceTest {
 
     @Test(expected = ChatNotFoundException::class)
     fun getLastNumberMessagesWithIdAndChatIdChatNotFind() {
-    val result = ChatService.getLastNumberMessagesWithIdAndChatId(0,0,1)
+        ChatService.getLastNumberMessagesWithIdAndChatId(0,0,1)
     }
 
     @Test
@@ -139,18 +138,19 @@ class ChatServiceTest {
     fun deleteMessage() {
         ChatService.deleteMessage(0,0)
     }
-    @Test (expected = MessageNotFoundException::class)
+    @Test
     fun deleteMessageChatExistsMessageNotExists() {
         val unreadMessage2 = Message("incoming", content = "Какое то непрочитанное сообщение для чата 2 (индекс чата 2)")
         ChatService.add(2, unreadMessage2) //В чат с индексом пользователя 2 - непрочитанное сообщение
-        ChatService.deleteMessage(2,3)
+        val result = ChatService.deleteMessage(2,3)
+        assertEquals(false, result) //операция удаления вернет false, если не найдет элемент для удаления
     }
     @Test
     fun deleteMessageChatExistsMessageExists() {
         val unreadMessage2 = Message("incoming", content = "Какое то непрочитанное сообщение для чата 2 (индекс чата 2)")
         ChatService.add(2, unreadMessage2) //В чат с индексом пользователя 2 - непрочитанное сообщение
         val result = ChatService.deleteMessage(2,0)
-        assertEquals(true, result.markForDelete)
+        assertEquals(true, result)
     }
 
     @Test (expected = ChatNotFoundException::class) //Исключение если чата не существует
