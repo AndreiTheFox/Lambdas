@@ -130,7 +130,8 @@ class ChatServiceTest {
         ChatService.add(2, unreadMessage2) //В чат с индексом пользователя 2 - непрочитанное сообщение, итого 6 непрочитанных сообщений в чате 2
         // С 4 ID сообщения (5е сообщение в списке) вернуть 3 следующих сообщения
         val result = ChatService.getLastNumberMessagesWithIdAndChatId(2,4,3)
-        assertEquals(1, result.size)    //Проверка того, что вернулся список из 1 элемента, т.к. запрос превышает имеющееся количество сообщений после ID = 4
+        //Проверка того, что вернулся список из 1 элемента, т.к. запрос превышает имеющееся количество сообщений после ID = 4, т.е. 2 сообщения, с ID = 4 и ID = 5
+        assertEquals(2, result.size)
         assertEquals(true, result.last().alreadyRead)// Проверка установки значения о прочтении = true
     }
 

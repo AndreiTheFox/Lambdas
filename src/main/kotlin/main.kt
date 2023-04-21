@@ -15,9 +15,10 @@ fun main() {
     ChatService.add(2, unreadMessage2) //В чат с индексом пользователя 2 - непрочитанное сообщение
     ChatService.add(3, unreadMessage2) //В чат с индексом пользователя 3 - непрочитанное сообщение
     ChatService.add(4, unreadMessage2) //В чат с индексом пользователя 4 - непрочитанное сообщение
-    ChatService.deleteChat(3)
+ //   ChatService.deleteChat(3)
 
    // println(ChatService.deleteMessage(1,0))
-
-    println(ChatService.getLastMessageFromEveryChat())
+println(ChatService.getUnreadChatsCount())
+ //   println(ChatService.getLastMessageFromEveryChat())
+  //  println(ChatService.getLastNumberMessagesWithIdAndChatId(2,0,5))
 }
